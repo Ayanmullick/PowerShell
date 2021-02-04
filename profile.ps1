@@ -11,5 +11,5 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 
 
 
-#Installs Profile--->   Invoke-Expression (Invoke-WebRequest -UseBasicParsing http://bit.ly/ayanProfile)  or  https://git.io/fhGoi
-#                       iex (iwr -UseBasicParsing https://git.io/fhGoi)
+#Installs Profile--->   Invoke-Expression (Invoke-WebRequest -UseBasicParsing http://bit.ly/ayanProfile)
+#                       iex (iwr -UseBasicParsing https://git.io/JtzUW)
