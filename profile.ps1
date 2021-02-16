@@ -14,3 +14,4 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 #Installs Profile--->   Invoke-Expression (Invoke-WebRequest -UseBasicParsing http://bit.ly/ayanProfile)
 #                       iex (iwr -UseBasicParsing https://git.io/JtzUW)
 #Set-PSReadLineKeyHandler -Chord Ctrl+b -ScriptBlock {iex (iwr -UseBasicParsing https://git.io/JtzUW)} -Verbose
+#Set-PSReadLineKeyHandler -Chord Ctrl+b -ScriptBlock {iex (iwr -UseBasicParsing https://git.io/JtzUW);[Microsoft.PowerShell.PSConsoleReadLine]::AcceptLine()} -Verbose   
