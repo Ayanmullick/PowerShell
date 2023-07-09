@@ -3,8 +3,11 @@
 #New-PSDrive -Name Azure -PSProvider SHiPS -root 'AzurePSDrive#Azure'
 #Set-Location Azure:
 
-Import-Module -Name PSReadLine -Version 2.2.0 -Verbose
-Import-Module Az.Tools.Predictor -Verbose
+#Import-Module -Name PSReadLine -MinimumVersion 2.2.6
+#PSReadLine  2.2.6| Az.Tools.Predictor 1.1.0| CompletionPredictor 0.1.1 #All predictors working fine       
+
+Import-Module CompletionPredictor
+Import-Module Az.Tools.Predictor
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 Set-PSReadLineOption -PredictionViewStyle ListView
 
