@@ -50,6 +50,13 @@ Get-Date -Format "ddd M.d.yy H:m" #Thu 3.16.23 10:33
 
 #Most Microsoft Windows text logs have a 19 character timestamp 
 
+#Time setup on a machine
+w32tm /query /status  #Shows the time source and time offset
+w32tm /query /configuration | Select-String -Pattern "NtpServer"
+w32tm /query /configuration  
+
+
+
 #endregion
 
 
