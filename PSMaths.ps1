@@ -55,6 +55,8 @@ w32tm /query /status  #Shows the time source and time offset|  source IP:
 w32tm /query /configuration | Select-String -Pattern "NtpServer"
 w32tm /query /configuration  
 
+chronyc sources  #Linux equicalent
+
 
 
 #endregion
