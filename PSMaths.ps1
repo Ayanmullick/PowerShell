@@ -32,7 +32,7 @@ Get-Date -Format "MM/dd/yyyy HH:mm:ss (zzz)"  #08 08 2023 22:56:20 (-05:00)  #Sh
 @{ "$((Get-TimeZone).Id)" = Get-Date}  #Shows timezone and date
 
 $FileName = "DummyFile_" + (Get-Date -Format HHmm)  + -join ((Get-TimeZone).Id -split '' | Where-Object { $_ -cmatch '[A-Z]' }) + ".txt"  #Output:  DummyFile_1422CST.txt
-$FileName = "DummyFile_" +(Get-Date -F HHmm) + -join ((Get-TimeZone).Id -split ''|? { $_ -cmatch '[A-Z]' })
+$FileName = "DummyFile_" +(Get-Date -F HHmm) + -join ((Get-TimeZone).Id -split ''|? { $_ -cmatch '[A-Z]' })+ ".txt"
 
 get-date -UFormat “%Y_%m_%d_%H_%M_%S”
 Get-Date -Format "dddd MM/dd/yyyy HH:mm K"  #Friday 05/21/2021 22:23 -05:00  #K denotes timezone
