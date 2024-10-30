@@ -43,11 +43,8 @@ iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
 winget install PowerShell
 
 
-
-
 dotnet --version
 dotnet --info
-
 
 choco upgrade chocolatey   #https://docs.chocolatey.org/en-us/choco/commands/upgrade#examples
 choco   #Output: Chocolatey v0.9.9.12
@@ -65,17 +62,12 @@ winget list
 Get-WGPackage -ID Microsoft.PowerShell|select *  #Show package details
 
 
-
 winget search dotnet                        #Search packages. no wild card
 winget show Microsoft.dotnetRuntime.6-x64   #Show package details
 
 Winget upgrade --id Microsoft.Edge
-
 Winget upgrade --all   #Winget upgrade --all --silent  #upgrades all pagka
-
 winget upgrade --all --include-unknown --verbose  #Includes unknown packages 
-
-
 Winget upgrade --id  Microsoft.dotnet
 
 <#Multiple installed packages found matching input criteria. Please refine the input.
@@ -88,7 +80,6 @@ Microsoft .NET SDK        Microsoft.dotnet
 winget list --name 'Microsoft .NET SDK'
 
 winget install -?
-
 #Couldn't figure upgrading which dotnet in reasonable time. Used below example
 winget install -e --id Microsoft.dotnet  #works
 
@@ -151,21 +142,19 @@ winget install --id Microsoft.WindowsTerminal -e --scope machine  #Installs on m
 #Installed from GitHub release page:  https://github.com/microsoft/terminal/releases
 runas /user:<Domain>\adminV-MullicA /savecred c:\temp\terminal\wt.exe
 
-
-
-
 #endregion
 
 
+
+
 #region dotnet
+
+dotnet --list-sdks
 <#
-PS C:\> DOTNET --LIST-SDKS
 2.0.3 [C:\Program Files\dotnet\sdk]
 2.1.402 [C:\Program Files\dotnet\sdk]
 6.0.100 [C:\Program Files\dotnet\sdk]
 #>
-
-
 
 
 dotnet clean   #removes references to old dlls
@@ -173,12 +162,10 @@ dotnet clean   #removes references to old dlls
 
 
 #First Blazor WASM project
-
 dotnet new blazorwasm -o \HelloBlazor
 dotnet run  #Make sure you have the JavaScript debugger extension
 
 dotnet add package markdig
-
 
 
 #region: Run PowerShell in .NET |   https://github.com/adamdriscoll/youtube/tree/main/dotnet/Run%20PowerShell%20in%20.NET
@@ -264,7 +251,7 @@ Error while running 'C:\ProgramData\chocolatey\lib\microsoft-vclibs-140-00\tools
  See log for details.
 
 
- winget-cli v1.8.1911 [Approved]
+winget-cli v1.8.1911 [Approved]
 winget-cli package files install completed. Performing other installation steps.
 ERROR: 'winget-cli' requires at least Windows 10 version 1809 (build 17763). See https://github.com/microsoft/winget-cli#installing-the-client for more information.
 The install of winget-cli was NOT successful.
