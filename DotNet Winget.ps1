@@ -156,6 +156,19 @@ dotnet --list-sdks
 6.0.100 [C:\Program Files\dotnet\sdk]
 #>
 
+#region Uninstall older .Net SDKs
+# Define the URL for the installer
+$installerUrl = "https://github.com/dotnet/cli-lab/releases/download/1.7.550802/dotnet-core-uninstall-1.7.550802.msi"
+$installerPath = "C:\temp\installer.msi"
+
+Invoke-WebRequest -Uri $installerUrl -OutFile $installerPath  # Download the installer
+Start-Process -FilePath $installerPath -ArgumentList "/quiet", "/norestart" -Wait    # Install the tool. Need to restart Terminal after this.
+
+dotnet-core-uninstall remove --sdk 8.0.204 --verbosity detailed #Unistall the SDK. Worked
+
+#endregion
+
+
 
 dotnet clean   #removes references to old dlls
 
