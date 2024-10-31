@@ -156,7 +156,7 @@ dotnet --list-sdks
 6.0.100 [C:\Program Files\dotnet\sdk]
 #>
 
-#region Uninstall older .Net SDKs
+#region Uninstall older .Net SDKs  | https://github.com/dotnet/cli-lab/releases
 # Define the URL for the installer
 $installerUrl = "https://github.com/dotnet/cli-lab/releases/download/1.7.550802/dotnet-core-uninstall-1.7.550802.msi"
 $installerPath = "C:\temp\installer.msi"
