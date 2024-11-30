@@ -10,3 +10,39 @@ Get-InstalledModule | ForEach-Object -Parallel {$Name= $PSItem.Name; $Vpresent=$
       Get-InstalledModule $Name -AllVersions|Where-Object {$_.Version -lt $Vpresent}|ForEach-Object {Write-Host "- Uninstalling $Name version $($PSItem.Version)..." -ForegroundColor Magenta; $PSItem | 
             Uninstall-Module -Force -Verbose}                                                                                             #Uninstall older versions
                                           }
+
+                                          
+#region v24 for Az modules
+# Get all Az modules and their submodules
+$azModules = Get-Module -ListAvailable Az.*
+
+# Group modules by name to handle all versions of each submodule
+$groupedModules = $azModules | Group-Object -Property Name
+
+foreach ($moduleGroup in $groupedModules) {
+    $moduleName = $moduleGroup.Name
+    $moduleVersions = $moduleGroup.Group | Select-Object -Property Name, Version, ModuleBase -Unique
+
+    if ($moduleVersions.Count -gt 1) {
+        # Sort versions and exclude the latest one
+        $versionsToRemove = $moduleVersions | Sort-Object Version | Select-Object -SkipLast 1
+
+        foreach ($version in $versionsToRemove) {
+            Write-Host "Removing older version: $($version.Name) $($version.Version)" -ForegroundColor Yellow
+            Write-Host "Module Path: $($version.ModuleBase)" -ForegroundColor Yellow
+
+            # Remove the folder of the older version
+            try {
+                Remove-Item -Recurse -Force -Path $version.ModuleBase
+                Write-Host "Successfully removed $($version.Name) version $($version.Version)" -ForegroundColor Green
+            } catch {
+                Write-Host "Failed to remove $($version.Name) version $($version.Version)" -ForegroundColor Red
+                Write-Host $_.Exception.Message -ForegroundColor Red
+            }
+        }
+    } else {
+        Write-Host "Only one version of $moduleName is installed. No action needed." -ForegroundColor Cyan
+    }
+}
+
+#endRegion
