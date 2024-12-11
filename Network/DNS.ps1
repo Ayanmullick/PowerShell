@@ -44,5 +44,19 @@ Set-DnsClientServerAddress -InterfaceIndex 2 -ServerAddresses ("172.17.2.209")
 
 
 Register-DnsClient -Verbose
+
+
+#view and update the DNS suffix search list | https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/configure-domain-suffix-search-list-domain-name-system-clients
+Set-DnsClientGlobalSetting -SuffixSearchList '<>' -Verbose  #No prefixing the '.'
+Get-DnsClientGlobalSetting
+<#Output
+UseSuffixSearchList : True
+SuffixSearchList    : {credt.int.metc.state.mn.us}
+UseDevolution       : True
+DevolutionLevel     : 0
+#>
+#With multiple suffixes the system will try to resolve the name with each suffix in the list in that order
+Set-DnsClientGlobalSetting -SuffixSearchList @("contoso.com","fabrikam.com")
+
 #endregion
 
