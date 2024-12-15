@@ -52,14 +52,26 @@ choco list --local-only   #Lists packages installed
 
 
 #region Winget
-winget -v
-winget list
 
+#region: PowerShell Client | https://powershellisfun.com/2024/11/28/using-the-powershell-winget-module/
+Install-PSResource Microsoft.WinGet.Client -Scope AllUsers -Verbose
+Get-WinGetPackage|select -First 10
+Get-WinGetPackage|? Source -EQ 'winget'|select -First 1
+Get-WinGetPackage|? Source -EQ 'winget'|Update-WinGetPackage -Verbose  #Worked
+
+#Older version
 Install-Module WingetTools
 Get-WGInstalled  #lists all the equivalent to command below
 
 winget list
 Get-WGPackage -ID Microsoft.PowerShell|select *  #Show package details
+#endregion
+
+
+winget -v
+winget list
+
+
 
 
 winget search dotnet                        #Search packages. no wild card
