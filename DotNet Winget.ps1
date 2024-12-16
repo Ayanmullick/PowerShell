@@ -58,6 +58,7 @@ Install-PSResource Microsoft.WinGet.Client -Scope AllUsers -Verbose
 Get-WinGetPackage|select -First 10
 Get-WinGetPackage|? Source -EQ 'winget'|select -First 1
 Get-WinGetPackage|? Source -EQ 'winget'|Update-WinGetPackage -Verbose  #Worked
+Install-WinGetPackage -Id Microsoft.PowerShell
 
 #Older version
 Install-Module WingetTools
