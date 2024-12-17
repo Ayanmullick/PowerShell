@@ -54,6 +54,16 @@ choco list --local-only   #Lists packages installed
 #region Winget
 
 #region: PowerShell Client | https://powershellisfun.com/2024/11/28/using-the-powershell-winget-module/
+#https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget-on-windows-sandbox
+$progressPreference = 'silentlyContinue'
+Write-Host "Installing WinGet PowerShell module from PSGallery..."
+Install-PackageProvider -Name NuGet -Force | Out-Null
+Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
+Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
+Repair-WinGetPackageManager  #Worked. Winget was running after this.
+Write-Host "Done."
+
+
 Install-PSResource Microsoft.WinGet.Client -Scope AllUsers -Verbose
 Get-WinGetPackage|select -First 10
 Get-WinGetPackage|? Source -EQ 'winget'|select -First 1
