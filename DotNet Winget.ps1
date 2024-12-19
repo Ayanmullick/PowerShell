@@ -40,6 +40,8 @@ Install-MSIProduct -Path $path -Verbose
 
 iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
 
+iex "& { $(irm https://aka.ms/get-winget) }" -Verbose  #Installs winget.  #Untested
+
 winget install PowerShell
 
 
@@ -53,11 +55,15 @@ choco list --local-only   #Lists packages installed
 
 #region Winget
 
-#region: PowerShell Client | https://powershellisfun.com/2024/11/28/using-the-powershell-winget-module/
+#region: PowerShell Client | https://powershellisfun.com/2024/11/28/using-the-powershell-winget-module/  | And installs winget too
 #https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget-on-windows-sandbox
 $progressPreference = 'silentlyContinue'
 Write-Host "Installing WinGet PowerShell module from PSGallery..."
-Install-PackageProvider -Name NuGet -Force | Out-Null
+
+#WARNING: Unable to download from URI 'https://go.microsoft.com/fwlink/?LinkID=627338&clcid=0x409' to ''.
+#WARNING: Unable to download the list of available providers. Check your internet connection.
+Install-PackageProvider -Name NuGet -Force | Out-Null  #Can fail if the internet is not available
+
 Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
 Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
 Repair-WinGetPackageManager  #Worked. Winget was running after this.
