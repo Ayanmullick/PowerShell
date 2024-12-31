@@ -28,8 +28,8 @@ foreach ($moduleGroup in $groupedModules) {
         $versionsToRemove = $moduleVersions | Sort-Object Version | Select-Object -SkipLast 1
 
         foreach ($version in $versionsToRemove) {
-            Write-Host "Removing older version: $($version.Name) $($version.Version)" -ForegroundColor Yellow
-            Write-Host "Module Path: $($version.ModuleBase)" -ForegroundColor Yellow
+            Write-Host "Removing older version: $($version.Name) : $($version.Version) → $($version.ModuleBase)" -ForegroundColor Yellow
+            #Write-Host "Module Path: $($version.ModuleBase)" -ForegroundColor Yellow
 
             # Remove the folder of the older version
             try {
