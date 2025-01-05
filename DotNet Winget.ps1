@@ -64,7 +64,7 @@ Write-Host "Installing WinGet PowerShell module from PSGallery..."
 #WARNING: Unable to download the list of available providers. Check your internet connection.
 Install-PackageProvider -Name NuGet -Force | Out-Null  #Can fail if the internet is not available
 
-Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
+Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null  #-Verbose -Scope AllUsers
 Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
 Repair-WinGetPackageManager  #Worked. Winget was running after this.
 Write-Host "Done."
