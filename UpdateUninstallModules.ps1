@@ -14,7 +14,7 @@ Get-InstalledModule | ForEach-Object -Parallel {$Name= $PSItem.Name; $Vpresent=$
                                           
 #region v24 for Az modules
 # Get all Az modules and their submodules
-$azModules = Get-Module -ListAvailable Az.*,Microsoft.Graph*
+$azModules = Get-Module -ListAvailable Az.*,Microsoft.*
 
 # Group modules by name to handle all versions of each submodule
 $groupedModules = $azModules | Group-Object -Property Name
