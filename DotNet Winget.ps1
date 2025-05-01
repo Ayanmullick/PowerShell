@@ -83,6 +83,10 @@ Get-WGInstalled  #lists all the equivalent to command below
 
 winget list
 Get-WGPackage -ID Microsoft.PowerShell|select *  #Show package details
+
+
+Find-WinGetPackage kubelogin
+Install-WinGetPackage -Id Microsoft.Azure.Kubelogin -Verbose
 #endregion
 
 
