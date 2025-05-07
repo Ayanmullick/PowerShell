@@ -50,6 +50,7 @@ $date=(Find-Module PowerShellForGitHub -Repository PSGallery).AdditionalMetadata
 ddd M.d.yy  #My custom date format in System regional settings. 'ddd' is short for day of week. 'dddd' is the full day
 
 Get-Date -Format "ddd M.d.yy H:m" #Thu 3.16.23 10:33
+Get-Date -Format "ddd M.d H:m"    #Wed 5.7 16:12
 
 #Most Microsoft Windows text logs have a 19 character timestamp 
 
