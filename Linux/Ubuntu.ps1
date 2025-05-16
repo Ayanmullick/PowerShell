@@ -78,3 +78,5 @@ EXPOSE 3389
 CMD service dbus start; /usr/lib/systemd/systemd-logind & service xrdp start ; bash
 
 #endregion
+
+sudo reboot  #Restart VM
