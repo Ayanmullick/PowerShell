@@ -14,9 +14,9 @@ pwsh # Start PowerShell
 Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
 
 #Add subsystem to SSH config
-sudo nano /etc/ssh/sshd_config 
+sudo nano /etc/ssh/sshd_config
 Subsystem powershell /usr/bin/pwsh -sshs -NoLogo -NoProfile #CTRL+O ENTER to save and CTRL+X key to close nano editor
-sudo service sshd restart  
+sudo service sshd restart
 
 
 #Connect
@@ -45,20 +45,21 @@ New-SSHSession -ComputerName 65.52.236.54 -Port 22 -Credential $Cred -Verbose
 
 
 #region Didn't work | Creating PS session using password didn't work. Friedrich Weinmann [friedrich.weinmann@microsoft.com ] confirmed SSH is the way forward with Linux
-New-PSSession -ComputerName 192.168.0.6 -Port 22 -Name RHELSession -Credential $Cred -SessionOption $o  -Verbose 
-#-UseSSL: Needs cert configured on Linux VM 
+New-PSSession -ComputerName 192.168.0.6 -Port 22 -Name RHELSession -Credential $Cred -SessionOption $o  -Verbose
+#-UseSSL: Needs cert configured on Linux VM
 #  -Authentication Kerberos : -Kerberos is used when no authentication method and no user name are specified.  Kerberos accepts domain user names, but not local user names.
 
 
-$o = New-PSSessionOption -SkipCACheck -SkipRevocationCheck -SkipCNCheck 
+$o = New-PSSessionOption -SkipCACheck -SkipRevocationCheck -SkipCNCheck
 
 set-item wsman:\localhost\client\TrustedHosts RHELPW -Concatenate -Force
-   
+
   set winrm/config/client '@{AllowUnencrypted="true"}'
   winrm set winrm/config/client/auth '@{Basic="true"}'
   winrm set winrm/config/service/auth '@{Basic="true"}'
 
 #endregion
+
 
 
 #Doesn't work
