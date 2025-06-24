@@ -87,6 +87,10 @@ Get-WGPackage -ID Microsoft.PowerShell|select *  #Show package details
 
 Find-WinGetPackage kubelogin
 Install-WinGetPackage -Id Microsoft.Azure.Kubelogin -Verbose
+
+Find-WinGetPackage -Id Microsoft.DotNet
+Find-WinGetPackage -Name 'Microsoft .NET'
+Find-WinGetPackage | Where-Object Id -like 'Microsoft.DotNet*runtime*'  #Lists only the runtimes
 #endregion
 
 
