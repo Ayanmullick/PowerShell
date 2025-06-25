@@ -1,6 +1,8 @@
 ﻿#.net framework version
 Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -recurse |Get-ItemProperty -name Version,Release -EA 0 |Where { $_.PSChildName -match '^(?!S)\p{L}'} |Select PSChildName, Version, Release|ft -AutoSize
 (Get-ItemProperty "HKLM:Software\Microsoft\NET Framework Setup\NDP\v4\Full").Version
+[System.Runtime.InteropServices.RuntimeInformation]::get_FrameworkDescription()
+
 
 #region Update dotnet framework  .Net   .  check how to install Github packages
 Get-PackageSource  #Chocolatey should already be installed
