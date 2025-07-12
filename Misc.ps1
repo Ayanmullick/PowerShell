@@ -16,7 +16,7 @@ $speaker.Speak("how are you")
 
 
 
-#region Counter
+#region Countdown
 for($i=10; $i -ge 1; $i--) {Start-Sleep -Seconds 1;Write-Host `n$i}
 
 
