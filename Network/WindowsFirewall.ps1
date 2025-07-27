@@ -3,7 +3,7 @@
 Invoke-Command -ComputerName ayn -Credential administrator -ScriptBlock {[Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey("LocalMachine",$env:COMPUTERNAME).OpenSubKey("System\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile").GetValue("EnableFirewall")}
 (get-wmiobject -list -namespace root\default | where-object { $_.name -eq "StdRegProv"}).GetDwordValue('2147483650', "System\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile","EnableFirewall")  #thru WMI
 
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False   #Disable firewall------------------
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False   #Disable firewall
 
 
 
@@ -19,7 +19,7 @@ Enable-PSRemoting -SkipNetworkProfileCheck -Force
 Set-ExecutionPolicy RemoteSigned
 
 
-Get-NetFirewallRule -Name FPS-ICMP4-ERQ-In|Set-NetFirewallRule -Enabled True  #Enable ipv4 ping------
+Get-NetFirewallRule -Name FPS-ICMP4-ERQ-In|Set-NetFirewallRule -Enabled True  #Enable ipv4 ping
 
 Get-NetFirewallRule -DisplayName *Echo*|select -Property name, Displayname,Enabled|ft -Wrap -AutoSize
 Get-NetFirewallRule -DisplayGroup *Remote*|select -Property name,DisplayGroup,Displayname,Enabled|sort DisplayGroup|ft -Wrap -AutoSize
@@ -69,13 +69,6 @@ netsh advfirewall firewall set rule dir=out name="Network Discovery (WSD-Out)" n
 
 
 
-Get-NetAdapterBinding -InterfaceAlias Ethernet
-
-Disable-NetAdapterBinding -Name Ethernet -ComponentID ms_tcpip6
-
-Set-NetIPInterface -InterfaceIndex 2 -AddressFamily IPv6 -InterfaceMetric 5
-Restart-server
 
 
-#Set Dns to point to dynamic and not static :netsh interface ip set dns "Local Area Connection" dhcp
 

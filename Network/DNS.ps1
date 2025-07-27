@@ -76,3 +76,6 @@ Add-WindowsFeature telnet-client  #Install telnet client
 Set-DnsClientServerAddress -InterfaceIndex 2 -ServerAddresses ("172.17.2.209")
 
 #endregion
+
+
+#Set Dns to point to dynamic and not static :netsh interface ip set dns "Local Area Connection" dhcp
