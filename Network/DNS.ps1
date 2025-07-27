@@ -60,3 +60,19 @@ Set-DnsClientGlobalSetting -SuffixSearchList @("contoso.com","fabrikam.com")
 
 #endregion
 
+
+
+
+#region SWIB
+
+
+
+ping  -a 172.17.2.209 -l 9014  #Verify jumbo 
+
+Set-DNSClient -InterfaceAlias Storage* -RegisterThisConnectionsAddress $False   #Disable DNS registration 
+
+Add-WindowsFeature telnet-client  #Install telnet client  
+
+Set-DnsClientServerAddress -InterfaceIndex 2 -ServerAddresses ("172.17.2.209")
+
+#endregion

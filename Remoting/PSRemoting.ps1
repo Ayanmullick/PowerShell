@@ -92,3 +92,111 @@ winrm e winrm/config/listener  #https://forums.ivanti.com/s/article/WinRM-relate
 Compare-Object -ReferenceObject $(winrm get winrm/config) -DifferenceObject $(ICm -ComputerName ACE2D23243SQ001 -ScriptBlock {winrm get winrm/config})
 
 #endregion
+
+
+
+#region port 80 and 443 blocking issue
+
+netsh http show servicestate    #shows if port 80 and 443 is taken up and which process is using it.
+
+
+
+winrm e winrm/config/listenerwinrm
+
+winrm e winrm/config/listener   #shows if the compatibility listener is enabled 
+<#Listener
+    Address = *
+    Transport = HTTP
+    Port = 5985
+    Hostname
+    Enabled = true
+    URLPrefix = wsman
+    CertificateThumbprint
+    ListeningOn = 10.191.98.164, 127.0.0.1, ::1, fe80::5efe:10.191.98.164%7, fe80::d40:2a74:acbd:3d9e%2
+
+Listener [Source="Compatibility"]
+    Address = *
+    Transport = HTTP
+    Port = 80
+    Hostname
+    Enabled = true
+    URLPrefix = wsman
+    CertificateThumbprint
+    ListeningOn = 10.191.98.164, 127.0.0.1, ::1, fe80::5efe:10.191.98.164%7, fe80::d40:2a74:acbd:3d9e%2
+
+Listener [Source="Compatibility"]
+    Address = *
+    Transport = HTTPS
+    Port = 443
+    Hostname = NLGDVMRASTABVM3.corp.nlg.net
+    Enabled = true
+    URLPrefix = wsman
+    CertificateThumbprint
+    ListeningOn = 10.191.98.164, 127.0.0.1, ::1, fe80::5efe:10.191.98.164%7, fe80::d40:2a74:acbd:3d9e%2
+#>
+
+winrm get winrm/config
+
+Microsooft US support center locations
+charlotte
+fargo
+los calenous
+redmond
+
+
+
+
+
+winrm set winrm/config/service @{EnableCompatibilityHttpListener="false"}
+<#Service
+    RootSDDL = O:NSG:BAD:P(A;;GA;;;BA)(A;;GR;;;IU)S:P(AU;FA;GA;;;WD)(AU;SA;GXGW;;;WD)
+    MaxConcurrentOperations = 4294967295
+    MaxConcurrentOperationsPerUser = 1500
+    EnumerationTimeoutms = 240000
+    MaxConnections = 300
+    MaxPacketRetrievalTimeSeconds = 120
+    AllowUnencrypted = true
+    Auth
+        Basic = true
+        Kerberos = true
+        Negotiate = true
+        Certificate = false
+        CredSSP = false
+        CbtHardeningLevel = Relaxed
+    DefaultPorts
+        HTTP = 5985
+        HTTPS = 5986
+    IPv4Filter = *
+    IPv6Filter = *
+    EnableCompatibilityHttpListener = false
+    EnableCompatibilityHttpsListener = true
+    CertificateThumbprint
+    AllowRemoteAccess = true
+    #>
+winrm set winrm/config/service @{EnableCompatibilityHttpsListener="false"}
+<#Service
+    RootSDDL = O:NSG:BAD:P(A;;GA;;;BA)(A;;GR;;;IU)S:P(AU;FA;GA;;;WD)(AU;SA;GXGW;;;WD)
+    MaxConcurrentOperations = 4294967295
+    MaxConcurrentOperationsPerUser = 1500
+    EnumerationTimeoutms = 240000
+    MaxConnections = 300
+    MaxPacketRetrievalTimeSeconds = 120
+    AllowUnencrypted = true
+    Auth
+        Basic = true
+        Kerberos = true
+        Negotiate = true
+        Certificate = false
+        CredSSP = false
+        CbtHardeningLevel = Relaxed
+    DefaultPorts
+        HTTP = 5985
+        HTTPS = 5986
+    IPv4Filter = *
+    IPv6Filter = *
+    EnableCompatibilityHttpListener = false
+    EnableCompatibilityHttpsListener = false
+    CertificateThumbprint
+    AllowRemoteAccess = true
+#>
+#endregion

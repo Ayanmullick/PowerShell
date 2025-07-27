@@ -109,7 +109,7 @@ $Version = '1.5'
 $PublicConf = '{}'
 $PrivateConf = '{
   "username": "<username>",
-  "password": "<password>"
+  "password": "<>"
 }'
 
 Set-AzureVMExtension -ExtensionName $ExtensionName -VM $vm `
@@ -128,12 +128,12 @@ $scope = (Get-AzureRmVM -ResourceGroupName Linux -Name Ubuntu).id
 
 
 
-New-AzureRmRoleAssignment -SignInName ayn@ayn.onmicrosoft.com -RoleDefinitionName "Virtual Machine Administrator Login" -Scope $scope -Verbose  
+New-AzureRmRoleAssignment -SignInName ayn@<>.onmicrosoft.com -RoleDefinitionName "Virtual Machine Administrator Login" -Scope $scope -Verbose  
 New-AzureRmRoleAssignment -ObjectId '832b1bdf-d0bc-4c03-a97b-91279eb9ab21' -RoleDefinitionName "Virtual Machine Administrator Login" -Scope $scope -Verbose
 
 
 
-New-AzureRmRoleAssignment -SignInName ayanmullick@hotmail.com -RoleDefinitionName "Virtual Machine Administrator Login" -Scope $scope -Verbose  #didn't work with sign in name. had to use object id
+New-AzureRmRoleAssignment -SignInName ayanmullick@<>.com -RoleDefinitionName "Virtual Machine Administrator Login" -Scope $scope -Verbose  #didn't work with sign in name. had to use object id
 New-AzureRmRoleAssignment -ObjectId 16fe1c2a-8a92-4615-9a34-99453d2b6c9c -RoleDefinitionName "Virtual Machine Administrator Login" -Scope $scope -Verbose
 
 
