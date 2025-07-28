@@ -1,5 +1,3 @@
-
-
 #Tracert with Powershell
 Test-NetConnection -ComputerName 40.80.221.165 -TraceRoute  #Cannot add port
 Resolve-DnsName $((Test-NetConnection cemgportal.dev.att.com -TraceRoute).TraceRoute | Select -SkipLast 1 | Select -Last 1)  #Resolves the last hop
@@ -7,55 +5,6 @@ Resolve-DnsName $((Test-NetConnection cemgportal.dev.att.com -TraceRoute).TraceR
 (Test-NetConnection cemgportal.dev.att.com -TraceRoute).TraceRoute|Resolve-DnsName
 
 #region Traceroute with public IP identification
-function Get-IpInfo {
-    param([string]$IPAddress)
-    try {
-        (Invoke-WebRequest "http://ipinfo.io/$IPAddress/json" -UseBasicParsing).Content | ConvertFrom-Json
-    } catch { $null }
-}
-
-$target  = "10.20.10.2"
-$result  = Test-NetConnection $target -InformationLevel Detailed -TraceRoute
-
-$traceAsString = ($result.TraceRoute | ForEach-Object {
-    $dns = (Resolve-DnsName $_ -ErrorAction SilentlyContinue).NameHost
-    if ($dns) { "$_`t$dns" }
-    else {
-        $ip = Get-IpInfo $_
-        "$_`t$($ip ? "$($ip.org)|$($ip.city)" : '')"
-    }
-}) -join "`n"
-
-$result.PSObject.Properties.Remove('TraceRoute')
-$result | Add-Member NoteProperty TraceRoute $traceAsString -Force
-$result
-
-<#ComputerName         : google.com
-RemoteAddress          : 2607:f8b0:4009:818::200e
-NameResolutionResults  : 2607:f8b0:4009:818::200e
-                         142.250.190.14
-InterfaceAlias         : Ethernet 2
-SourceAddress          : 2600:6c44:11f0:2930:bcac:a552:3ab:ab4e
-NetRoute (NextHop)     : fe80::2c67:beff:fe14:99a3
-PingSucceeded          : True
-PingReplyDetails (RTT) : 39 ms
-TraceRoute             : 2600:6c44:11f0:2930::1 syn-2600-6c44-11f0-2930-0000-0000-0000-0001.biz6.spectrum.com
-                         ::     SrfcL3-W11-1022
-                         2001:506:100:2005::2   lag-59.dtr21mdsnwi.netops.charter.com
-                         ::     SrfcL3-W11-1022
-                         ::     SrfcL3-W11-1022
-                         ::     SrfcL3-W11-1022
-                         2001:506:100:20d::5    lag-101.bbr01euclwi.netops.charter.com
-                         ::     SrfcL3-W11-1022
-                         2001:506:100:5::2      lag-1.bbr01chcgil.netops.charter.com
-                         2001:506:100:200::7    lag-811.prr01chcgil.netops.charter.com
-                         2001:506:100:d300::1f  2001-0506-0100-d300-0000-0000-0000-001f.inf6.spectrum.com
-                         2607:f8b0:831f::1      AS15169 Google LLC|Chicago
-                         2001:4860:0:1::5682    AS15169 Google LLC|Ashburn
-                         2001:4860:0:1::5677    AS15169 Google LLC|Ashburn
-                         2607:f8b0:4009:818::200e       ord38s29-in-x0e.1e100.net
-#>
-
 #Enforce ipv4
 function Test-PublicConnection {                                                                                
      [CmdletBinding()]
