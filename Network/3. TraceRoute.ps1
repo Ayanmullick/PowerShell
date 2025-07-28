@@ -61,7 +61,7 @@ TraceRoute             : 192.168.1.1    SAX2V1R.lan , osync.lan , |
 
 
 
-#region Trace over a port
+#region Pathping provides trace statistics
 pathping 10.216.20.1 -4
 
 <#Tracing route to 10.216.20.1 over a maximum of 30 hops
