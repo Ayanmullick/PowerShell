@@ -30,3 +30,8 @@ Import-pssession -session $adsession -Module ActiveDirectory
 #creates shortcuts that points to the module on the domain controller
 
 #endregion
+
+
+
+#Disable Remote Desktop Network Level Authentication using PowerShell  NLA
+(Get-WmiObject -class Win32_TSGeneralSetting -Namespace root\cimv2\terminalservices -ComputerName $ComputerName -Filter "TerminalName='RDP-tcp'").SetUserAuthenticationRequired(0)

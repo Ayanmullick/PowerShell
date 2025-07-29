@@ -26,3 +26,8 @@ for ($i = 1; $i -le 100; $i++ )
 write-progress -activity "Search in Progress" -status "$i% Complete:" -percentcomplete $i;}
 
 #endregion
+
+
+#Extract test.zip to C: drive-----$a =new-object -com shell.application; ($a).namespace("c:\").Copyhere(($a).namespace("c:\test.zip").items())
+Compress-Archive -LiteralPath C:\%computername%-ipconfig.txt,C:\Images\%computername%-system.txt,C:\Images\%computername%.etl -CompressionLevel Optimal -DestinationPath C:\MSticket.Zip   #Create a zip
+
