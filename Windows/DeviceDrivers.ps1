@@ -20,7 +20,7 @@ gwmi win32_product|? {$_.name -notlike "*Microsoft*" -and $_.vendor -notlike "*M
 
 
 Get-PnpDevice -class Bluetooth -FriendlyName 'WF-1000XM4'|fl
-<#Caption                     : WF-1000XM4
+<#Caption                   : WF-1000XM4
 Description                 : Bluetooth Device
 InstallDate                 : 
 Name                        : WF-1000XM4
