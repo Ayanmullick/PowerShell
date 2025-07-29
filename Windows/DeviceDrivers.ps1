@@ -53,3 +53,8 @@ InstanceId                  : BTHENUM\DEV_AC800AD8F209\7&37DA03EC&0&BLUETOOTHDEV
 Problem                     : CM_PROB_NONE
 ProblemDescription          : 
 #>
+
+<#Disable-PnpDevice -InstanceId $device.InstanceId -Confirm:$false
+Start-Sleep -Seconds 10
+Enable-PnpDevice -InstanceId $device.InstanceId -Confirm:$false
+#>
