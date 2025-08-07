@@ -2,6 +2,10 @@
 #Test on Terminal.
 #Remove Scope and parallel while running on PS5.1.
 #Ran sucessfully in updating. However, didn't uninstall. Had to run again. Add '-Wait' parameter so it waits till update finishes to uninstall
+
+Start-Process pwsh -ArgumentList "-noprofile" -Verb RunAs #Run PowerShell without profile with elevation
+
+
 $WarningPreference='silentlyContinue'
 Get-InstalledModule | ForEach-Object -Parallel {$Name= $PSItem.Name; $Vpresent=$PSItem.Version; $Vavailable=$(Find-Module $Name).Version  #Get Variables so parallel works fine
       if($Vavailable -gt $Vpresent) {Write-Host "Updating $Name at $($PSItem.InstalledLocation) from $Vpresent to $Vavailable" -ForegroundColor Magenta; Update-Module -Name $Name -Scope AllUsers -Force}   
