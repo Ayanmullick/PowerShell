@@ -81,4 +81,8 @@ $dateTime = [DateTime]::SpecifyKind([DateTime]::Parse("2023-03-21T17:05:10.99577
 #Converts IST to cST
 [TimeZoneInfo]::ConvertTime([DateTime]::ParseExact('2023-03-21T17:05:10', 'yyyy-MM-ddTHH:mm:ss', $null), [TimeZoneInfo]::FindSystemTimeZoneById('India Standard Time'), [TimeZoneInfo]::FindSystemTimeZoneById('Central Standard Time'))
 
+
+#Converts live time to Central timezone with daylight consideration, on Windows and Ubuntu
+'{0:MMddyy:HHmmss} {1}' -f ($ct=[TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTimeOffset]::UtcNow,'America/Chicago')),(($ct.Offset.TotalHours -eq -5)?'CDT':'CST')
+#081625:000156 CDT
 #endregion
