@@ -5,3 +5,4 @@ $stamp= '{0:MMddyy:HHmmss} {1}' -f ($ct=[TimeZoneInfo]::ConvertTimeBySystemTimeZ
 Get-Process |Sort-Object -Property WorkingSet64 -Descending | Select-Object -First 20 ProcessName, Id, CPU, @{N = 'WS(MB)'; E = {[math]::Round($_.WorkingSet64/1MB, 2)}} |
   ConvertTo-Html -As Table -Title 'Processes' -PreContent "<h1>Processes (Ubuntu runner)</h1><p>Updated $stamp</p>" |
   Set-Content site/ubuntuprocesses2.html -Encoding utf8
+#https://htmlpreview.github.io/?https://github.com/Ayanmullick/PowerShell/blob/master/HtmlReport/BuiltIn/ubuntuprocesses2.html

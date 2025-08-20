@@ -26,7 +26,7 @@ jobs:
           $stamp = ([DateTime]::UtcNow).AddHours(-5).ToString('MMddyy:HHmmss')  # naive UTC-5 (~CT in DST)  #The image didn't have timezone package to convert to accurate Central time.
           Get-Process | Select-Object -First 200 ProcessName, Id, CPU, WS |
             ConvertTo-Html -As Table -Title 'Processes' -PreContent "<h1>Processes (AzPS container)</h1><p>Updated $stamp (UTC-5 approx)</p>" |
-            Set-Content site/AzPsCtrProcesses.html -Encoding utf8
+            Set-Content site/AzPsCtrProcesses.html -Encoding utf8   #https://htmlpreview.github.io/
 
       - name: Commit site/AzPsCtrProcesses.html to repo
         shell: bash

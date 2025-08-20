@@ -23,3 +23,8 @@ Push-OutputBinding 'Response' ([HttpResponseContext]@{StatusCode = [HttpStatusCo
 
 Get-Process| ConvertTo-Html -Property ProcessName, ID, CPU, WS, Handles -Title ProcessList| Out-File -FilePath .\index.html -Encoding utf8 -Append 
 #endregion
+
+<#Renders GitHub html without github pages
+https://htmlpreview.github.io/
+https://raw.githack.com/
+#>
