@@ -1,0 +1,13 @@
+name: Publish processes (Ubuntu) to Pages (script)
+on: workflow_dispatch
+permissions: {contents: write, pages: write, id-token: write}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: {name: github-pages, url: "${{ steps.deployment.outputs.page_url }}"}
+    steps:
+      - uses: actions/checkout@v4
+      - run: pwsh ./PowerShell/ubuntuprocesses.ps1
+      - {uses: stefanzweifel/git-auto-commit-action@v6, with: {commit_message: Update site/ubuntuprocesses2.html, file_pattern: site/ubuntuprocesses2.html}}
+      - {uses: actions/upload-pages-artifact@v3, with: {path: site}}
+      - {id: deployment, uses: actions/deploy-pages@v4}

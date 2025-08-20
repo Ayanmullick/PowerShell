@@ -1,0 +1,15 @@
+#When manually triggered, it runs a powershell file, commits the geherated HTML report to the site folder in the repo.
+#And it uploads the whole site folder to the pages artifact and deploys the artifact to GitHub pages.
+name: PsWrite Ubuntu process
+on: workflow_dispatch
+permissions: {contents: write, pages: write, id-token: write}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: {name: github-pages, url: "${{ steps.deployment.outputs.page_url }}"}
+    steps:
+      - {uses: actions/checkout@v4}
+      - run: pwsh ./PowerShell/PswProcess.ps1
+      - {uses: stefanzweifel/git-auto-commit-action@v6, with: {commit_message: Update site/PswProcess.html, file_pattern: site/PswProcess.html}}
+      - {uses: actions/upload-pages-artifact@v3, with: {path: site}}  #Needed unless one uses classic GitHub Pages deployment from a branch
+      - {id: deployment, uses: actions/deploy-pages@v4}

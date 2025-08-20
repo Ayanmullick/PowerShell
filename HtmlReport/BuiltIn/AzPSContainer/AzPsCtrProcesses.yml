@@ -1,0 +1,54 @@
+name: Publish processes (AzPS) to Pages
+on: workflow_dispatch
+permissions: { pages: write, id-token: write, contents: write }
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/azure-powershell:latest
+    steps:
+      # Install git inside the container (needed for commit/push)
+      - name: Install git
+        shell: bash
+        run: |
+          apt-get update
+          apt-get install -y git
+
+      # Check out the default branch INTO the container workspace
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # safer for pushes
+
+      - name: Generate HTML
+        shell: pwsh
+        run: |
+          $null = New-Item -ItemType Directory -Force site
+          $stamp = ([DateTime]::UtcNow).AddHours(-5).ToString('MMddyy:HHmmss')  # naive UTC-5 (~CT in DST)  #The image didn't have timezone package to convert to accurate Central time.
+          Get-Process | Select-Object -First 200 ProcessName, Id, CPU, WS |
+            ConvertTo-Html -As Table -Title 'Processes' -PreContent "<h1>Processes (AzPS container)</h1><p>Updated $stamp (UTC-5 approx)</p>" |
+            Set-Content site/AzPsCtrProcesses.html -Encoding utf8
+
+      - name: Commit site/AzPsCtrProcesses.html to repo
+        shell: bash
+        working-directory: ${{ github.workspace }}
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE" || true
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/AzPsCtrProcesses.html
+          git commit -m "Update site/AzPsCtrProcesses.html (AzPS naive UTC-5)" || true
+          git push
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
