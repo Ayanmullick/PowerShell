@@ -1,0 +1,21 @@
+#Generates a md process report on a schedule and comits to the 'reports' folder in a repo with a timestamp name
+name: Process Report
+on: {schedule: [{cron: "0 14 * * 0"}], workflow_dispatch: {}}  # 14:00 UTC 9:00 AM CDT every Sunday
+permissions: {contents: write}
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - {uses: actions/checkout@v4}
+      - name: Install module & generate Markdown report
+        shell: pwsh
+        run: |
+          Install-PSResource FormatMarkdownTable -Repository PSGallery -TrustRepository -Quiet -AcceptLicense
+
+          $stamp = '{0:MMdd.HHmm}{1}' -f ($ct=[TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTimeOffset]::UtcNow,'America/Chicago')), ( ($ct.Offset.TotalHours -eq -5) ? 'CDT' : 'CST' )
+          Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 20 ProcessName,Id,CPU,@{n='WS(MB)';e={[math]::Round($_.WorkingSet64/1MB,2)}} |
+             Format-MarkdownTableTableStyle -ShowMarkdown:$false *> $null
+
+          (Get-Clipboard) -replace '(?s)^\*\*.*?\*\*\s*','' | Set-Content "reports/Process$stamp.md" -Encoding UTF8
+          
+      - {uses: stefanzweifel/git-auto-commit-action@v6, with: {commit_message: "Add process report [skip ci]", file_pattern: "reports/*.md"}}
