@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+  /* remove UA chrome that causes the white border & ensure no fallback bg peeks through */
+  html,body{margin:0;padding:0;background:transparent}
+  /* responsive wrapper + table layout tweaks */
+  .scrollbox{overflow:auto;max-width:100%}
+  fluent-data-grid{display:inline-block}
+  fluent-data-grid-cell{white-space:nowrap}
+  fluent-data-grid-row > fluent-data-grid-cell:not(:first-child){
+    text-align:right; font-variant-numeric:tabular-nums;
+  }
+</style>
+<script type="module" src="https://unpkg.com/@fluentui/web-components"></script>
+<script type="module">
+  // Build a Fluent Data Grid from the ConvertTo-Html table (once)
+  addEventListener("DOMContentLoaded", () => {
+    const t = document.querySelector("table"); if (!t) return;
+
+    // ConvertTo-Html puts headers in the first row
+    const trs = [...t.querySelectorAll("tr")];
+    const headers = [...trs.shift().querySelectorAll("th")].map(th => th.textContent.trim());
+    const rows = trs.map(tr => {
+      const cells = [...tr.querySelectorAll("td")];
+      return Object.fromEntries(headers.map((h,i)=>[h,(cells[i]?.textContent.trim()) ?? ""]));
+    });
+
+    const grid = document.createElement("fluent-data-grid");
+    grid.generateHeader = "sticky";
+    grid.rowsData = rows; // DataGrid API
+
+    const wrap = document.createElement("div"); wrap.className = "scrollbox";
+    t.replaceWith(wrap); wrap.appendChild(grid);
+  });
+
+  // 🌓 icon-only theme toggle (scoped to provider luminance)
+  addEventListener("click", e=>{
+    if(!e.target.closest("[data-toggle-theme]")) return;
+    const p = document.getElementById("fluent-root");
+    const cur = p.getAttribute("base-layer-luminance") ?? "1";
+    p.setAttribute("base-layer-luminance", cur === "1" ? "0.15" : "1"); // light ↔ dark
+  });
+</script>
+</head><body>
+<fluent-design-system-provider id="fluent-root" base-layer-luminance="1"
+  style="position:fixed; inset:0; overflow:auto; display:block">
+  <div style="display:flex;justify-content:end;margin:.5rem 0">
+    <button data-toggle-theme title="Toggle theme" aria-label="Toggle theme">🌓</button>
+  </div>
+  <h1>Processes</h1><p>Updated 081625:113905 CDT</p>
+<table>
+<colgroup><col/><col/><col/><col/></colgroup>
+<tr><th>ProcessName</th><th>Id</th><th>CPU</th><th>WS(MB)</th></tr>
+<tr><td>Memory Compression</td><td>2860</td><td></td><td>1296.32</td></tr>
+<tr><td>Code - Insiders</td><td>16796</td><td>31.03125</td><td>896.66</td></tr>
+<tr><td>msedge</td><td>9432</td><td>243.6875</td><td>537.76</td></tr>
+<tr><td>dwm</td><td>3720</td><td></td><td>430.46</td></tr>
+<tr><td>Code - Insiders</td><td>11708</td><td>311.546875</td><td>421.53</td></tr>
+<tr><td>pwsh</td><td>17008</td><td>34.734375</td><td>344.98</td></tr>
+<tr><td>msedge</td><td>14484</td><td>32.96875</td><td>340.65</td></tr>
+<tr><td>Wispr Flow</td><td>11424</td><td>230.390625</td><td>334.58</td></tr>
+<tr><td>explorer</td><td>7376</td><td>220.90625</td><td>324.33</td></tr>
+<tr><td>MsMpEng</td><td>4024</td><td></td><td>315.17</td></tr>
+<tr><td>Grammarly.Desktop</td><td>7212</td><td>190.921875</td><td>303.93</td></tr>
+<tr><td>msedge</td><td>10072</td><td>149.125</td><td>277.8</td></tr>
+<tr><td>powershell_ise</td><td>9464</td><td>55.171875</td><td>268.89</td></tr>
+<tr><td>svchost</td><td>2560</td><td></td><td>267.68</td></tr>
+<tr><td>svchost</td><td>1340</td><td></td><td>255.42</td></tr>
+<tr><td>Code - Insiders</td><td>16560</td><td>111.0625</td><td>205.69</td></tr>
+<tr><td>SearchHost</td><td>7972</td><td>3.28125</td><td>197.95</td></tr>
+<tr><td>Wispr Flow</td><td>15944</td><td>551.859375</td><td>196.68</td></tr>
+<tr><td>Microsoft.CmdPal.UI</td><td>14000</td><td>12.6875</td><td>187.42</td></tr>
+<tr><td>OneDrive</td><td>16200</td><td>48.890625</td><td>185.97</td></tr>
+</table>
+</fluent-design-system-provider>
+</body></html>
