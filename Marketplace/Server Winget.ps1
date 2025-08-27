@@ -32,7 +32,7 @@ At line:1 char:1
  
 #>
 
-Get-AppxLog -ActivityID 5f91ee5f-26fe-0001-7d09-925ffe26db01
+Get-AppxLog -ActivityID '5f91ee5f-26fe-0001-7d09-925ffe26db01'
 Get-AppxPackage -AllUsers
 
 
@@ -78,4 +78,23 @@ The install of microsoft-windows-terminal was NOT successful.
 Error while running 'C:\ProgramData\chocolatey\lib\microsoft-windows-terminal\tools\chocolateyInstall.ps1'.
  See log for details.
 #>
+#endregion
+
+
+#region PowerShell 7 on server 2012
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI" -Verbose
+
+#Azure module install works
+Set-PSRepository psgallery -InstallationPolicy Trusted -Verbose
+Register-PSResourceRepository -Name MAR -Uri 'https://mcr.microsoft.com' -ApiVersion ContainerRegistry  -Verbose
+Install-PSResource -Name Az.Compute,Az.Network,Az.Resources,Az.Storage -Repository MAR -Scope AllUsers -TrustRepository -Verbose
+
+
+#Winget install fails. Choco install succeeds but Winget and Windows Terminal install from choco fails.
+iex ((New-Object Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+#choco install winget  -verbose
+#choco install microsoft-windows-terminal -y
+choco install conemu -y  #Alternate terminal works
 #endregion
