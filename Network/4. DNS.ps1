@@ -29,7 +29,17 @@ Resolve-DnsName -Name www.bing.com -Type MX #resolves a name to a mail exchanger
 
 Set-DNSClient -InterfaceAlias Storage* -RegisterThisConnectionsAddress $False   ##Disable DNS registration
 
-Get-DnsClientServerAddress
+Get-DnsClientServerAddress | Format-Table -AutoSize
+<#InterfaceAlias              InterfaceIndex AddressFamily ServerAddresses                                       
+--------------              -------------- ------------- ---------------                                       
+Ethernet                                13 IPv4          {10.30.10.10, 10.20.10.10}                            
+Ethernet                                13 IPv6          {}                                                    
+isatap.reddog.microsoft.com             12 IPv4          {10.30.10.10, 10.20.10.10}                            
+isatap.reddog.microsoft.com             12 IPv6          {}                                                    
+Loopback Pseudo-Interface 1              1 IPv4          {}                                                    
+Loopback Pseudo-Interface 1              1 IPv6          {fec0:0:0:ffff::1, fec0:0:0:ffff::2, fec0:0:0:ffff::3}                                                                                                                                             
+#>
+
 Get-DnsClientServerAddress -InterfaceAlias Wi-Fi -AddressFamily IPv4
 
 
