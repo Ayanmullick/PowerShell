@@ -30,3 +30,9 @@ $Services[1]
 #region split method
 #https://devblogs.microsoft.com/scripting/using-the-split-method-in-powershell/
 #https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_split?view=powershell-7.3
+
+
+#region .Replace method.
+'RemoteApp' -creplace '[^A-Z]'  #RA  #Gets the upper case characters in a string.
+[regex]::Replace('RemoteApp', '[^A-Z]', '')  #RA   #The same effect using the .Replace method           
+#endregion
