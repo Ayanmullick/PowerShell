@@ -1,0 +1,40 @@
+<!doctype html><html lang="en">
+
+<!--In this Vertical bar chart one needs to write code to create and place each bar and label.
+Svg rect does not have a display attribute for it like title, description, caption or name. One needs to use separate text inline. 
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Six Vertical Bars</title>
+<style>
+html{background:#000;color:#fff}
+html.invert{filter:invert(1)}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Arial,Helvetica,sans-serif}
+svg{display:block}
+line{stroke:currentColor}
+rect{fill:currentColor}
+text{fill:currentColor}
+button{position:fixed;top:16px;right:16px;padding:6px 12px;background:transparent;color:#fff;border:1px solid currentColor;
+border-radius:999px;cursor:pointer}
+</style>
+<body>
+<button type="button" id="themeToggle" aria-pressed="false" title="Toggle black and white">◐</button>
+<svg viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Six vertical rectangle bars">
+<!-- baseline -->
+<line x1="40" y1="300" x2="600" y2="300" stroke="#bbb" stroke-width="1"/>
+<!-- baseline at y=0 for children -->
+<g transform="translate(0,300)" font-family="sans-serif" font-size="12" text-anchor="middle" dominant-baseline="text-before-edge">
+<rect x="60" width="60" height="180" transform="scale(1,-1)"/><text x="90" y="-2">Turbine A</text>
+<rect x="150" width="60" height="210" transform="scale(1,-1)"/><text x="180" y="-2">Turbine B</text>
+<rect x="240" width="60" height="160" transform="scale(1,-1)"/><text x="270" y="-2">Turbine C</text>
+<rect x="330" width="60" height="240" transform="scale(1,-1)"/><text x="360" y="-2">Turbine D</text>
+<rect x="420" width="60" height="200" transform="scale(1,-1)"/><text x="450" y="-2">Turbine E</text>
+<rect x="510" width="60" height="170" transform="scale(1,-1)"/><text x="540" y="-2">Turbine F</text>
+</g>
+</svg>
+<script>
+var r=document.documentElement,t=document.getElementById('themeToggle');
+t.onclick=function(){var i=r.classList.toggle('invert');t.setAttribute('aria-pressed',i);};
+</script>
+</body>
+</html>

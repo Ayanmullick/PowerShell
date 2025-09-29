@@ -1,0 +1,60 @@
+<!doctype html>
+
+<!--This Vertical bar chart uses a Javascript library where you can import your datapoints and labels [const L and V] and pass the values to generate your bar chart.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Power Output Bar Chart</title>
+<style>
+:root{color-scheme:light dark;--bg:#fff;--fg:#000}
+body{font-family:Arial,sans-serif;margin:32px;min-height:100vh;background:var(--bg);color:var(--fg)}
+body[data-theme=dark]{--bg:#000;--fg:#fff}
+.h{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 16px;flex-wrap:wrap}
+h1{margin:0}
+.btn{border:1px solid currentColor;background:transparent;color:inherit;padding:8px 18px;border-radius:999px;font-weight:600;cursor:pointer}
+.btn{transition:background-color .2s;min-width:160px;text-align:center}
+.btn:hover{background:rgba(0,0,0,.05)}
+body[data-theme=dark] .btn:hover{background:rgba(255,255,255,.12)}
+canvas{max-width:720px;width:100%;max-height:420px;background:transparent}
+#msg{margin-top:12px;font-size:.9rem;opacity:.8}
+</style>
+</head>
+<body>
+<div class="h">
+  <h1>Average Power Output by Turbine</h1>
+  <button id="theme" class="btn" type="button" aria-label="Toggle theme" aria-pressed="false" title="Toggle theme">◐</button>
+</div>
+<canvas id="c" role="img" aria-label="Bar chart comparing turbine power"></canvas>
+<div id="msg" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
+<script>
+const L=['Turbine A','Turbine B','Turbine C','Turbine D','Turbine E','Turbine F'];
+const V=[3.4,3.8,3.1,4.0,3.6,3.2];
+const elC=document.getElementById('c'),ctx=elC.getContext('2d');
+const elT=document.getElementById('theme'),elM=document.getElementById('msg');
+const mq=matchMedia('(prefers-color-scheme: dark)');
+let ch,manual=false,theme=mq.matches?'dark':'light';
+const pal=()=>{const s=getComputedStyle(document.body),t=s.getPropertyValue('--fg').trim()||'#000';return{t,b:t}};
+const sync=()=>{elT&&elT.setAttribute('aria-pressed',String(theme==='dark'))};
+const paint=()=>{document.body.dataset.theme=theme;const p=pal();ch&&ch.destroy();
+  ch=new Chart(ctx,{type:'bar',
+    data:{labels:L,datasets:[{data:V,backgroundColor:p.b,borderColor:p.b,borderWidth:1}]},
+    options:{plugins:{legend:{display:false},tooltip:{enabled:false}},
+      scales:{x:{ticks:{color:p.t},title:{display:true,text:'Turbine',color:p.t}},
+              y:{beginAtZero:true,ticks:{color:p.t},title:{display:true,text:'Average Output (kW)',color:p.t}}}}
+  });
+};
+const init=()=>{if(!window.Chart){elM.textContent='Chart library failed to load.';return}
+  paint();sync();
+  elT&&elT.addEventListener('click',()=>{manual=true;theme=theme==='dark'?'light':'dark';paint();sync()});
+  mq.addEventListener('change',e=>{if(manual)return;theme=e.matches?'dark':'light';paint();sync()});
+};
+document.addEventListener('DOMContentLoaded',()=>{
+  let tries=0,t=setInterval(()=>{if(window.Chart){clearInterval(t);init()}
+    else if(++tries>50){clearInterval(t);elM.textContent='Loading Chart.js timed out.'}},100);
+});
+</script>
+</body>
+</html>
