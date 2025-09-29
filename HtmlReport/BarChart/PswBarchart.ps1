@@ -3,7 +3,7 @@ Import-Module PSWriteHTML
 $labels = @('Turbine A','Turbine B','Turbine C','Turbine D','Turbine E','Turbine F')
 $values = @(3.4,3.8,3.1,4.0,3.6,3.2)
 
-$OutputPath = "MyBarChart.html"
+$OutputPath = "PswBarChart.html"
 
 Dashboard -Name 'Simple Bar Chart' -FilePath $OutputPath {
     Add-HTMLStyle -Css @{
