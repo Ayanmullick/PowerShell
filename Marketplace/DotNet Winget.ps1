@@ -155,10 +155,17 @@ runas /user:<Domain>\adminV-MullicA /savecred c:\temp\terminal\wt.exe
 
 dotnet --list-sdks
 <#
-2.0.3 [C:\Program Files\dotnet\sdk]
-2.1.402 [C:\Program Files\dotnet\sdk]
-6.0.100 [C:\Program Files\dotnet\sdk]
+8.0.414 [C:\Program Files\dotnet\sdk]
+9.0.305 [C:\Program Files\dotnet\sdk]
 #>
+
+dotnet --list-runtimes
+<#Microsoft.AspNetCore.App 9.0.9 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]
+Microsoft.NETCore.App 8.0.20 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.NETCore.App 9.0.9 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]
+Microsoft.WindowsDesktop.App 9.0.9 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App]
+#>
+
 
 #region Uninstall older .Net SDKs  | https://github.com/dotnet/cli-lab/releases
 # Define the URL for the installer
