@@ -25,13 +25,14 @@ $speak.GetInstalledVoices()| foreach  { $_.VoiceInfo.Name }
 }
 #>
 
-<#VSC 'VsCode Action Buttons' extension setting to add a statusbar button to speak clipboard
+<#VSC 'VsCode Action Buttons' extension setting to add a statusbar button to speak clipboard and terminate while speaking
 "actionButtons": { "reloadButton": null,
 
   "commands": [
     { "name": "🎙️", "command": "workbench.action.editorDictation.start", "useVsCodeApi": true, "tooltip": "Start Dictation" },
     { "name": "$(unmute)", "tooltip": "Speak clipboard", "useVsCodeApi": true,"command": "workbench.action.tasks.runTask", "args": ["Speak Clipboard"] }
-
+    { "name": "$(debug-stop) Stop", "tooltip": "Stop speaking", "useVsCodeApi": true, "command": "workbench.action.tasks.terminate", "args": ["terminateAll"]   // or omit args to choose a single task
+     }
   ]
 },
 #>
