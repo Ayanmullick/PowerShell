@@ -8,10 +8,6 @@
 
 
 
-#region text-to-speech
-$speaker=New-Object -ComObject sapi.spvoice
-$speaker.Speak("how are you")
-#endregion
 
 
 
