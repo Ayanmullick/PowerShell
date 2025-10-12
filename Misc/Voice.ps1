@@ -3,6 +3,13 @@ $speaker=New-Object -ComObject sapi.spvoice
 $speaker.Speak("how are you")
 #endregion
 
+<#Narrator commands
+Turn on Narrator (Win+Ctrl+Enter) 
+
+ (CapsLock+Shift+↓) to read the selected text.
+
+#>
+
 
 #region get available voices
 Add-Type -AssemblyName System.speech
@@ -39,3 +46,10 @@ $speak.GetInstalledVoices()| foreach  { $_.VoiceInfo.Name }
 
 
 
+<# Natural language package installation step. 
+Download. The MSIX for. The voice that you want. 
+Rename it to zip. And extract it. In your temp folder. 
+Download the adapter. 
+Extract the adapter and execute install EXE. 
+Point the EXE. To the. MSI XS unzipped folder. Uncheck other options. And just install for 64 bit. 
+#>
