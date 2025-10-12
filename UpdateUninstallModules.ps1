@@ -15,10 +15,21 @@ Get-InstalledModule | ForEach-Object -Parallel {$Name= $PSItem.Name; $Vpresent=$
             Uninstall-Module -Force -Verbose}                                                                                             #Uninstall older versions
                                           }
 
+#region
+Get-InstalledPSResource -Scope AllUsers   #|% {Update-PSResource -Scope AllUsers -Verbose}
+
+#Update-PSResource -Scope AllUsers -Verbose
+Update-PSResource -Scope AllUsers -Verbose -TrustRepository -Repository MAR
+
+#endregion
+
+
+
+
                                           
 #region v24 for Az modules
 # Get all Az modules and their submodules
-$azModules = Get-Module -ListAvailable Az.*,Microsoft.*
+$azModules = Get-Module -ListAvailable   #Az.*,Microsoft.*
 
 # Group modules by name to handle all versions of each submodule
 $groupedModules = $azModules | Group-Object -Property Name
