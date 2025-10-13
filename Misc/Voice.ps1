@@ -46,7 +46,7 @@ $speak.GetInstalledVoices()| foreach  { $_.VoiceInfo.Name }
 
 
 
-<# Natural language package installation step. 
+<# Natural language package installation step. [Worked on x64 but not on ARMx64]
 Download. The MSIX for. The voice that you want. 
 Rename it to zip. And extract it. In your temp folder. 
 Download the adapter. 
