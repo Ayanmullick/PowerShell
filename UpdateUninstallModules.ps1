@@ -6,24 +6,13 @@
 Start-Process pwsh -ArgumentList "-noprofile" -Verb RunAs #Run PowerShell without profile with elevation
 
 
-$WarningPreference='silentlyContinue'
-Get-InstalledModule | ForEach-Object -Parallel {$Name= $PSItem.Name; $Vpresent=$PSItem.Version; $Vavailable=$(Find-Module $Name).Version  #Get Variables so parallel works fine
-      if($Vavailable -gt $Vpresent) {Write-Host "Updating $Name at $($PSItem.InstalledLocation) from $Vpresent to $Vavailable" -ForegroundColor Magenta; Update-Module -Name $Name -Scope AllUsers -Force}   
-            else {Write-Host "$Name's version $Vpresent is up-to-date." -ForegroundColor Green}                                           #Update outdated module
-
-      Get-InstalledModule $Name -AllVersions|Where-Object {$_.Version -lt $Vpresent}|ForEach-Object {Write-Host "- Uninstalling $Name version $($PSItem.Version)..." -ForegroundColor Magenta; $PSItem | 
-            Uninstall-Module -Force -Verbose}                                                                                             #Uninstall older versions
-                                          }
-
 #region
-Get-InstalledPSResource -Scope AllUsers   #|% {Update-PSResource -Scope AllUsers -Verbose}
+#Get-InstalledPSResource -Scope AllUsers   #|% {Update-PSResource -Scope AllUsers -Verbose}
 
 #Update-PSResource -Scope AllUsers -Verbose
 Update-PSResource -Scope AllUsers -Verbose -TrustRepository -Repository MAR
 
 #endregion
-
-
 
 
                                           
@@ -61,3 +50,16 @@ foreach ($moduleGroup in $groupedModules) {
 }
 
 #endRegion
+
+
+
+
+
+$WarningPreference='silentlyContinue'
+Get-InstalledModule | ForEach-Object -Parallel {$Name= $PSItem.Name; $Vpresent=$PSItem.Version; $Vavailable=$(Find-Module $Name).Version  #Get Variables so parallel works fine
+      if($Vavailable -gt $Vpresent) {Write-Host "Updating $Name at $($PSItem.InstalledLocation) from $Vpresent to $Vavailable" -ForegroundColor Magenta; Update-Module -Name $Name -Scope AllUsers -Force}   
+            else {Write-Host "$Name's version $Vpresent is up-to-date." -ForegroundColor Green}                                           #Update outdated module
+
+      Get-InstalledModule $Name -AllVersions|Where-Object {$_.Version -lt $Vpresent}|ForEach-Object {Write-Host "- Uninstalling $Name version $($PSItem.Version)..." -ForegroundColor Magenta; $PSItem | 
+            Uninstall-Module -Force -Verbose}                                                                                             #Uninstall older versions
+                                          }
