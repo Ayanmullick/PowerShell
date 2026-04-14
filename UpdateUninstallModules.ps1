@@ -49,6 +49,9 @@ foreach ($moduleGroup in $groupedModules) {
     }
 }
 
+
+Remove-Item -Recurse -Force -Path $version.ModuleBase -ErrorAction Stop && Write-Host "Successfully removed $($version.Name) version $($version.Version)" -ForegroundColor Green
+ri -r -fo $version.ModuleBase -ea Stop && wh "Successfully removed $($version.Name) version $($version.Version)" -f Green
 #endRegion
 
 
