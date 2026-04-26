@@ -70,7 +70,8 @@ winget search dotnet                        #Search packages. no wild card
 winget show Microsoft.dotnetRuntime.6-x64   #Show package details
 
 
-winget install --id Microsoft.PowerShell --source winget --uninstall-previous --force --accept-package-agreements --accept-source-agreements --verbose
+
+winget install --exact --id Microsoft.PowerShell --source winget --installer-type wix --scope machine --force --accept-package-agreements --accept-source-agreements --verbose
 Winget upgrade --id Microsoft.Edge
 Winget upgrade --all   #Winget upgrade --all --silent  #upgrades all pagka
 winget upgrade --all --include-unknown --verbose  #Includes unknown packages 
