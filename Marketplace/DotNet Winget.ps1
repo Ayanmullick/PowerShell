@@ -70,7 +70,7 @@ winget search dotnet                        #Search packages. no wild card
 winget show Microsoft.dotnetRuntime.6-x64   #Show package details
 
 
-#for x64
+#for x64. Not for ARM.
 winget install --exact --id Microsoft.PowerShell --source winget --installer-type wix --scope machine --force --accept-package-agreements --accept-source-agreements --verbose
 #generic cross-platform version. Not forcing wix and let winget pick the default bundle
 winget install --exact --id Microsoft.PowerShell --source winget --uninstall-previous --force --accept-package-agreements --accept-source-agreements --verbose
