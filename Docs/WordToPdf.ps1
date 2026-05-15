@@ -23,3 +23,22 @@ Get-ChildItem C:\Temp -Filter *.doc? | ForEach-Object{
 }
 $w.Quit()
 #endregion
+
+
+
+
+
+#region  Adobe to edit PDF
+Install-WinGetPackage -Id Adobe.Acrobat.Pro -Verbose
+
+<# Warning if you have Adobe reader installed
+Adobe Acrobat
+Are you sure you want to uninstall? Keep Acrobat Reader to:
+. View, print, comment, and share with ease
+. Fill and sign forms anytime
+. Access PDFs on the go with 2GB free cloud storage
+The app is free to use. No billing or subscription required.
+
+Keep using Acrobat for free   |   Continue
+#>
+#endregion
