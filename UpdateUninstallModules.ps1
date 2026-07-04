@@ -12,6 +12,7 @@ Start-Process pwsh -ArgumentList "-noprofile" -Verb RunAs #Run PowerShell withou
 #Update-PSResource -Scope AllUsers -Verbose
 Update-PSResource -Scope AllUsers -Verbose -TrustRepository -Repository MAR
 
+Update-PSResource -Scope AllUsers -Verbose -TrustRepository -Repository PSGallery
 #endregion
 
 
@@ -36,13 +37,8 @@ foreach ($moduleGroup in $groupedModules) {
             #Write-Host "Module Path: $($version.ModuleBase)" -ForegroundColor Yellow
 
             # Remove the folder of the older version
-            try {
-                Remove-Item -Recurse -Force -Path $version.ModuleBase
-                Write-Host "Successfully removed $($version.Name) version $($version.Version)" -ForegroundColor Green
-            } catch {
-                Write-Host "Failed to remove $($version.Name) version $($version.Version)" -ForegroundColor Red
-                Write-Host $_.Exception.Message -ForegroundColor Red
-            }
+            try {ri -r -fo $version.ModuleBase -ea Stop && Write-Host "Successfully removed $($version.Name) version $($version.Version)" -f Green}
+            catch {Write-Host "Failed to remove $($version.Name) version $($version.Version)" -f Red && Write-Host $_.Exception.Message -f Red}
         }
     } else {
         Write-Host "Only one version of $moduleName is installed. No action needed." -ForegroundColor Cyan
