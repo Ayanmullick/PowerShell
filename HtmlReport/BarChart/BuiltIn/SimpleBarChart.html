@@ -1,0 +1,19 @@
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>
+  :root { color-scheme: light dark; }
+  body { background: Canvas; color: CanvasText; font: 16px/1.45 system-ui, sans-serif; padding: 1rem; }
+  .chart { max-width: 900px; }
+  .row { display: grid; grid-template-columns: 14rem 1fr 5rem; gap: .75rem; align-items: center; margin: .6rem 0; }
+  span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .track { background: Canvas; border: 1px solid ButtonBorder; border-radius: .4rem; overflow: hidden; }
+  .bar { height: 1.5rem; background: Highlight; }
+  b { text-align: right; font-variant-numeric: tabular-nums; }
+</style>
+<h1>Process Memory (MB)</h1>
+<div class="chart">
+<div class='row'><span>Memory Compression (2740)</span><div class='track'><div class='bar' style='width:100%'></div></div><b>2,848.27</b></div>
+<div class='row'><span>chrome (20236)</span><div class='track'><div class='bar' style='width:3.4%'></div></div><b>95.92</b></div>
+<div class='row'><span>Codex (8236)</span><div class='track'><div class='bar' style='width:1.1%'></div></div><b>30.28</b></div>
+<div class='row'><span>msedge (19732)</span><div class='track'><div class='bar' style='width:0.5%'></div></div><b>14.13</b></div>
+<div class='row'><span>Idle (0)</span><div class='track'><div class='bar' style='width:0%'></div></div><b>0.01</b></div>
+</div>
