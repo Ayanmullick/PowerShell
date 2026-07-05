@@ -24,7 +24,7 @@ Set-MarkdownOption -Header2Color '[4;32m'
 Install-Module PSMarkdown -Scope CurrentUser -AllowClobber -Verbose  #Ansillary modules in current user scope. Clobbered  ConvertFrom-Markdown from Microsoft.PowerShell.Utility
 Import-Module PSMarkdown -Prefix PS
 
-$Rules= Get-Content -Path 'C:\Users\ayanm\OneDrive - Mullick\PowerShell\ATT\WinAdminCenterRules.md'|ConvertFrom-PSMarkdown |select -ExcludeProperty H1  #The conversion adds an extra H1 property
+$Rules= Get-Content -Path 'C:\Users\<>\OneDrive - <>\PowerShell\ATT\WinAdminCenterRules.md'|ConvertFrom-PSMarkdown |select -ExcludeProperty H1  #The conversion adds an extra H1 property
 $Rules|ft  
 #endregion
 

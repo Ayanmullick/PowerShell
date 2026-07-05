@@ -17,7 +17,7 @@ Install-PSResource -Name Az -Repository MAR -Scope AllUsers -Verbose
 
 Set-PSResourceRepository -Name MAR -Trusted -Priority 10 -Verbose
 <#VERBOSE: Performing the operation "Set repository's value(s) in repository store" on target "MAR".
-PS C:\Users\ayanm> Get-PSResourceRepository
+PS C:\Users\<>> Get-PSResourceRepository
 
 Name      Uri                                      Trusted Priority IsAllowedByPolicy
 ----      ---                                      ------- -------- -----------------

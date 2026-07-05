@@ -1,0 +1,46 @@
+html, body { width: 100vw; height: 100vh; margin: 0; overflow: hidden; background: gainsboro; }
+body { font-family: "Segoe UI", Arial, sans-serif; color: black; }
+.main-section { width: 100vw !important; height: 100vh !important; overflow: hidden !important; padding: 0 !important; }
+.dash-grid { box-sizing: border-box; display: grid; width: 100vw; height: 100vh; padding: 8px; gap: 8px; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: 40px 68px 1.35fr 1.08fr .98fr; }
+.dash-header, .metric-strip, .dash-frame { border: 1px solid lightsteelblue; border-radius: 5px; background: white; overflow: hidden; }
+.dash-header { grid-column: 1 / 13; display: flex; align-items: center; justify-content: space-between; padding: 0 14px; color: ghostwhite; background: black; border-color: black; }
+.dash-title { font-size: 17px; font-weight: 650; }
+.dash-meta { font-size: 11px; color: lightsteelblue; white-space: nowrap; }
+.metric-strip { grid-column: 1 / 13; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; padding: 8px; background: ghostwhite; }
+.metric { display: grid; grid-template-columns: 7px minmax(0, 1fr); column-gap: 8px; min-width: 0; }
+.metric-bar { border-radius: 4px; }
+.metric-label { font-size: 10px; font-weight: 700; color: slategray; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.metric-value { font-size: 24px; line-height: 25px; font-weight: 760; color: black; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.metric-detail { font-size: 10px; color: darkslategray; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dash-frame { min-width: 0; min-height: 0; display: grid; grid-template-rows: 25px minmax(0, 1fr); }
+.frame-title { display: flex; align-items: center; padding: 0 9px; font-size: 11px; font-weight: 700; color: darkslategray; background: ghostwhite; border-bottom: 1px solid gainsboro; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.frame-body { min-width: 0; min-height: 0; overflow: hidden; padding: 2px 6px 4px; }
+.frame-label { font-size: 9px; line-height: 13px; color: slategray; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.span-7 { grid-column: span 7; } .span-6 { grid-column: span 6; } .span-5 { grid-column: span 5; } .span-4 { grid-column: span 4; } .span-3 { grid-column: span 3; } .span-2 { grid-column: span 2; }
+.mini-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 10px; line-height: 1.18; }
+.mini-table th { color: darkslategray; font-weight: 700; background: ghostwhite; }
+.mini-table th, .mini-table td { padding: 3px 4px; border-bottom: 1px solid gainsboro; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mini-table td.num, .mini-table th.num { text-align: right; }
+.apexcharts-title-text { font-weight: 700; }
+.apexcharts-toolbar { display: none !important; }
+.apexcharts-canvas, .apexcharts-svg { max-width: 100% !important; }
+@media (max-width: 1200px) { .dash-grid { grid-template-rows: 36px 62px 1.2fr 1fr .9fr; gap: 6px; padding: 6px; } .metric-value { font-size: 20px; line-height: 22px; } .frame-title { font-size: 10px; } .mini-table { font-size: 9px; } }
+
+
+.event-summary .mini-table { font-size: 8.5px; line-height: 1.08; table-layout: fixed; }
+.event-summary .mini-table th, .event-summary .mini-table td { padding: 2px 2px; }
+
+
+.event-summary .mini-table th:nth-child(1), .event-summary .mini-table td:nth-child(1) { width: 10%; }
+.event-summary .mini-table th:nth-child(2), .event-summary .mini-table td:nth-child(2) { width: 7%; }
+.event-summary .mini-table th:nth-child(3), .event-summary .mini-table td:nth-child(3) { width: 34%; }
+.event-summary .mini-table th:nth-child(4), .event-summary .mini-table td:nth-child(4) { width: 12%; }
+.event-summary .mini-table th:nth-child(5), .event-summary .mini-table td:nth-child(5) { width: 12%; }
+.event-summary .mini-table th:nth-child(6), .event-summary .mini-table td:nth-child(6) { width: 13%; }
+.event-summary .mini-table th:nth-child(7), .event-summary .mini-table td:nth-child(7) { width: 10%; }
+
+.disk-usage .mini-table { font-size: 8.5px; line-height: 1.05; table-layout: fixed; }
+.disk-usage .mini-table th, .disk-usage .mini-table td { padding: 2px 2px; }
+.disk-usage .mini-table th:nth-child(1), .disk-usage .mini-table td:nth-child(1) { width: 62%; }
+.disk-usage .mini-table th:nth-child(2), .disk-usage .mini-table td:nth-child(2) { width: 20%; }
+.disk-usage .mini-table th:nth-child(3), .disk-usage .mini-table td:nth-child(3) { width: 18%; }

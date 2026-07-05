@@ -3,7 +3,7 @@
 $env:PSModulePath -split ';'
 #This adds to the module path successfully. However, the ISE Show-command add-on still can't see the PS7 modules until the module is imported in the current session
 $CurrentValue = [Environment]::GetEnvironmentVariable("PSModulePath", "Machine")
-#[Environment]::SetEnvironmentVariable("PSModulePath", $CurrentValue + [System.IO.Path]::PathSeparator + "C:\Users\ayan\Documents\PowerShell\Modules", "Machine")
+#[Environment]::SetEnvironmentVariable("PSModulePath", $CurrentValue + [System.IO.Path]::PathSeparator + "C:\Users\<>\Documents\PowerShell\Modules", "Machine")
 [Environment]::SetEnvironmentVariable("PSModulePath", $CurrentValue + [System.IO.Path]::PathSeparator + "C:\Program Files\PowerShell\Modules", "Machine")  #And restart ISE.  Worked
 
 #Ended up installing powershellget and psreadline thru the ISA using force parameter to get the latest version so I could install other modules on the Terminal
