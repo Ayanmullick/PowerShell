@@ -1,4 +1,5 @@
 # Local AI/tooling workspace state
+.github/instructions/
 .github/copilot-instructions.md
 .agents/
 .codex/
