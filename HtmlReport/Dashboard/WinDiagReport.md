@@ -10,6 +10,14 @@ This folder contains a Windows diagnostics dashboard built with PowerShell and P
 - `style.css` contains the dashboard layout and visual styling.
 - `Windows-Diagnostics-Dashboard-repo-check.html` is the generated dashboard output used for review.
 
+## View The Generated HTML Report
+
+A committed sample report can be opened directly in a browser through an HTML viewer:
+
+[View the Windows diagnostics dashboard sample report](https://rawcdn.githack.com/Ayanmullick/PowerShell/refs/heads/master/HtmlReport/Dashboard/Windows-Diagnostics-Dashboard-repo-check.html)
+
+This link points to the generated `Windows-Diagnostics-Dashboard-repo-check.html` file in this folder. Use it for a quick review when you do not want to clone the repository or run the dashboard script locally.
+
 ## Prerequisites
 
 Run the dashboard from PowerShell 7 or Windows PowerShell on Windows. The dashboard rendering requires `PSWriteHTML` to be installed and available to `Import-Module PSWriteHTML`.
