@@ -1,17 +1,11 @@
-﻿#Works in parallel. However Update and uninstall verbosity aren't in sequence. I want it to wait till Azmodule update completes and uninstall child modules in one go.
-#Test on Terminal.
-#Remove Scope and parallel while running on PS5.1.
-#Ran sucessfully in updating. However, didn't uninstall. Had to run again. Add '-Wait' parameter so it waits till update finishes to uninstall
-
-Start-Process pwsh -ArgumentList "-noprofile" -Verb RunAs #Run PowerShell without profile with elevation
+﻿Start-Process pwsh -ArgumentList "-noprofile" -Verb RunAs #Run PowerShell without profile with elevation
 
 
 #region
 #Get-InstalledPSResource -Scope AllUsers   #|% {Update-PSResource -Scope AllUsers -Verbose}
-
 #Update-PSResource -Scope AllUsers -Verbose
-Update-PSResource -Scope AllUsers -Verbose -TrustRepository -Repository MAR
 
+Update-PSResource -Scope AllUsers -Verbose -TrustRepository -Repository MAR
 Update-PSResource -Scope AllUsers -Verbose -TrustRepository -Repository PSGallery
 #endregion
 
@@ -52,6 +46,10 @@ ri -r -fo $version.ModuleBase -ea Stop && wh "Successfully removed $($version.Na
 
 
 
+#Works in parallel. However Update and uninstall verbosity aren't in sequence. I want it to wait till Azmodule update completes and uninstall child modules in one go.
+#Test on Terminal.
+#Remove Scope and parallel while running on PS5.1.
+#Ran sucessfully in updating. However, didn't uninstall. Had to run again. Add '-Wait' parameter so it waits till update finishes to uninstall
 
 
 $WarningPreference='silentlyContinue'
