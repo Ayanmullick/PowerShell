@@ -1,3 +1,6 @@
+'CompletionPredictor','Az.Tools.Predictor'|%{(gmo -l $_)??(Install-PSResource $_ -Repository PSGallery -Scope CurrentUser -TrustRepository)}
+
+
 Import-Module CompletionPredictor
 Import-Module Az.Tools.Predictor
 
