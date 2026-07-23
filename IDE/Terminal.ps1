@@ -14,4 +14,6 @@ function prompt {
     $folderName = Get-Location| Split-Path -Leaf   
     "$folderName > "
 }
+
+function prompt {"$(Get-Location| Split-Path -Leaf)>"}  #OneLiner
 #endregion
