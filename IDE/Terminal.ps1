@@ -1,11 +1,8 @@
-#POWERSHELL_UPDATECHECK environment variable
-:SetEnvironmentVariable("POWERSHELL_UPDATECHECK", "LTS", "User")
-<#
+#region POWERSHELL_UPDATECHECK environment variable
 $env:POWERSHELL_UPDATECHECK = "LTS"
-PS C:\Temp> [Environment]::SetEnvironmentVariable("POWERSHELL_UPDATECHECK", "LTS", "User")
-PS C:\Temp> [Environment]::GetEnvironmentVariable("POWERSHELL_UPDATECHECK", "User")
-LTS
-#>
+[Environment]::SetEnvironmentVariable("POWERSHELL_UPDATECHECK", "LTS", "User")
+[Environment]::GetEnvironmentVariable("POWERSHELL_UPDATECHECK", "User")       #LTS
+#endregion
 
 
 #region #Sets the prompt to the last foldername in the path
