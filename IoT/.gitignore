@@ -1,0 +1,5 @@
+MicroPS/.runtime/
+MicroPS/build/
+MicroPS/packages/
+MicroPS/**/bin/
+MicroPS/**/obj/

@@ -1,9 +1,2 @@
-# Local AI/tooling workspace state
-.github/instructions/
-.github/copilot-instructions.md
-.agents/
-.codex/
-AGENTS.md
-
-# Local private notes
-.PrivateNotes/
+# Generated workspace output
+.WorkDir
