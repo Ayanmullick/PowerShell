@@ -1,4 +1,4 @@
-﻿Start-Process pwsh -ArgumentList "-noprofile" -Verb RunAs #Run PowerShell without profile with elevation
+﻿Start-Process -FilePath pwsh.exe -ArgumentList '-NoProfile' -Verb RunAs #Run PowerShell without profile with elevation
 
 
 #region
